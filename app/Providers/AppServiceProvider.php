@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\Guts;
 use App\Models\CapturedEvents;
+use App\PHPUnitListener;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use PHPUnit\Event\Facade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,9 +18,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Event::listen('*', function ($eventName, $data) {
-            if(! collect(['Illuminate\Log\Events\MessageLogged'])->contains($eventName))
-            info($eventName);
-        });
+        Facade::instance()->registerSubscriber(new PHPUnitListener);
     }
 }
