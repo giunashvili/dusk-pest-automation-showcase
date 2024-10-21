@@ -1,6 +1,8 @@
 <?php
 
+use App\PHPUnitListener;
 use Laravel\Dusk\TestCase;
+use PHPUnit\Event\Facade;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,9 @@ pest()->extend(Tests\TestCase::class)
 pest()->extend(TestCase::class)
     ->in('Browser');
 
+(function(Facade $facade) {
+    $facade->registerSubscriber(new PHPUnitListener);
+})();
 /*
 |--------------------------------------------------------------------------
 | Expectations

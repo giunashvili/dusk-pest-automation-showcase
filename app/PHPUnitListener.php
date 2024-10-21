@@ -2,13 +2,13 @@
 
 namespace App;
 
-use PHPUnit\Event\TestRunner\ExecutionFinished;
-use PHPUnit\Event\TestRunner\ExecutionFinishedSubscriber;
+use PHPUnit\Event\Test\Finished;
+use PHPUnit\Event\Test\FinishedSubscriber;
 
-final class PHPUnitListener implements ExecutionFinishedSubscriber
+final class PHPUnitListener implements FinishedSubscriber
 {
-    public function notify(ExecutionFinished $event): void
+    public function notify(Finished $event): void
     {
-        info(__METHOD__ . PHP_EOL . $this->message . PHP_EOL);
+        ray('YEEEEEES!');
     }
 }

@@ -2,12 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\Guts;
-use App\Models\CapturedEvents;
 use App\PHPUnitListener;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\ServiceProvider;
+use Exception;
 use PHPUnit\Event\Facade;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    public function boot(): void
+    public function boot(Facade $facade): void
     {
-        Facade::instance()->registerSubscriber(new PHPUnitListener);
+        $facade->registerSubscriber(new PHPUnitListener);
     }
 }
